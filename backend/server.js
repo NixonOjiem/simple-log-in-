@@ -1,9 +1,11 @@
+console.log('Starting server...');
 const express = require('express');
-const mysql = require('mysql');
-const app = express();
-const port = 3001;
+const mysql = require('mysql2');
+const cors = require('cors');
 
-// Middleware to parse JSON
+const app = express();
+const PORT = 3001;
+
 app.use(cors());
 app.use(express.json());
 
@@ -16,11 +18,14 @@ const db = mysql.createConnection({
 });
 
 db.connect(err => {
-    if (err) throw err;
-    console.log('Connected to MySQL Database');
-});
-
-app.post('/signin', (req, res) => {
+    if (err) {
+      console.error('Database connection failed: ' + err.stack);
+      return;
+    }
+    console.log('Connected to database.');
+  });
+  
+  app.post('/signin', (req, res) => {
     const { username, password } = req.body;
     const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
     db.query(query, [username, password], (err, results) => {
@@ -34,6 +39,6 @@ app.post('/signin', (req, res) => {
     });
   });
   
-  app.listen(port, () => {
-    console.log(`Server running on port ${port}}`);
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
