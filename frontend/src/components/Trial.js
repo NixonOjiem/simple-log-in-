@@ -12,9 +12,9 @@ const SignIn = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3001/signin', { username, password });
-      // alert(response.data);
+      alert(response.data);
+      localStorage.setItem('username', username); // Save username to local storage
       navigate('/home'); // Redirect to the homepage
-      localStorage.setItem('username', username);
     } catch (error) {
       alert('Wrong credentials');
     }
@@ -73,7 +73,7 @@ const SignUp = ({ setShowSignUp }) => {
       alert(response.data);
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert('email already exists');
+        alert('Username already exists');
       } else {
         alert('Error signing up');
       }
