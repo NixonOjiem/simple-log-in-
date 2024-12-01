@@ -135,14 +135,27 @@ code {
     background-color: #004eca;
 }
 
-.Container{
+.Hompage-Container{
     width: 100%;
     height:100%;
 }
 
 .Header{
     width: 100%;
-    height: 20%;
+    height: 9vh;
     background-color: #000a2d;
     color: #fef2f2;
+}
+
+.Leftnavigation{
+    width: 25%;
+    height: 70vh;
+    background-color:#000a2d;
+    margin-top: 10px;
+    border-radius: 15px;
+    color: #fff;
+}
+
+.Month-list li{
+    padding: 5px;
 }

@@ -1,10 +1,12 @@
 import React from 'react';
 import Header from './Header';
+import LeftNavigation from './LeftNavigation';
 
 const HomePage = () => {
   return (
-    <div className='Container'>
+    <div className='Hompage-Container'>
       <Header />
+      <LeftNavigation />
     </div>
   );
 };
