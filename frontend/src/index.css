@@ -154,8 +154,19 @@ code {
     margin-top: 10px;
     border-radius: 15px;
     color: #fff;
+    float: left;
 }
 
 .Month-list li{
     padding: 5px;
+}
+
+.Rightnavigation{
+    background-color: #000A2D;
+    width: 70%;
+    float: right;
+    margin-top: 10px;
+    border-radius: 15px;
+    height: 70vh;
+    color: #fff;
 }
