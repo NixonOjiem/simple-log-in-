@@ -169,10 +169,11 @@ code {
 .LogOut{
     float: right;
     color: #fef2f2;
-    padding: 12px;
+    padding: 10px;
     font-weight: bold;
     margin-top: 2px;
     border-radius: 5px;
+    font-size: 20px;
 }
 
 .LogOut:hover{
