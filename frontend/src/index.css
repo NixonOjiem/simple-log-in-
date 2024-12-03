@@ -34,6 +34,25 @@ code {
     padding: 20px;
 }
 
+.AppTittle{
+    color: #fef2f2;
+}
+
+.AppName-signup{
+    width: 100%;
+    background-color: rgba(190, 190, 190, 0.06);
+    color: #ffffff;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    outline: none;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+
 .google button {
     width: 100%;
     background-color: rgba(190, 190, 190, 0.06);
@@ -184,6 +203,7 @@ code {
     border-radius: 15px;
     color: #fff;
     float: left;
+    margin-left: 10px;
 }
 
 .Month-list li{
@@ -198,4 +218,6 @@ code {
     border-radius: 15px;
     height: 70vh;
     color: #fff;
+    margin-right: 10px;
 }
+

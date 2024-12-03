@@ -28,6 +28,9 @@ const SignIn = () => {
         <form onSubmit={handleSubmit}>
           <div className="container">
             <div className="card">
+              <div className='AppName'>
+                <h1 className='AppTittle'>QuizQuest</h1>
+              </div>
               <div className="google">
                 <button>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
@@ -84,6 +87,9 @@ const SignUp = ({ setShowSignUp }) => {
     <form onSubmit={handleSubmit}>
       <div className="container">
         <div className="card">
+        <div className='AppName-signup'>
+            <h1 className='AppTittle'>QuizQuest</h1>
+        </div>
           <div className="inputBox">
             <input
               type="text"
