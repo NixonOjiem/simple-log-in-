@@ -147,6 +147,23 @@ code {
     color: #fef2f2;
 }
 
+.LogOut{
+    float: right;
+    color: #fef2f2;
+    padding: 12px;
+    font-weight: bold;
+    margin-top: 2px;
+    border-radius: 5px;
+}
+
+.LogOut:hover{
+    background-color: #fef2f2;
+    color: #000a2d;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    cursor: pointer;
+}
+
 .Username{
     font-size: 20px;
     float: left;
