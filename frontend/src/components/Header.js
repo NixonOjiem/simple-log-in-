@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserLarge } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
     const [username, setUsername] = useState('');
@@ -12,7 +14,8 @@ function Header() {
   
     return (
       <div className='Header'>
-          {username && <h2>Hello, {username}!</h2>}
+        <FontAwesomeIcon icon={faUserLarge} className='UserIcon'/>
+        <h1 className='Username'>{username && <p>Hello, {username}!</p>}</h1>
       </div>
     );
   };

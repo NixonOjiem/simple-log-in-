@@ -147,6 +147,18 @@ code {
     color: #fef2f2;
 }
 
+.Username{
+    font-size: 20px;
+    float: left;
+    padding: 12px;
+}
+
+.UserIcon{
+    float: left;
+    padding: 12px;
+    font-size: 25px;
+}
+
 .Leftnavigation{
     width: 25%;
     height: 70vh;

@@ -3,20 +3,11 @@ import React from 'react'
 function LeftNavigation() {
   return (
     <div className='Leftnavigation'>
-        <h2>Month</h2>
+        <h2>Test</h2>
         <ul className='Month-list'>
-            <li>January</li>
-            <li>February</li>
-            <li>March</li>
-            <li>April</li>
-            <li>May</li>
-            <li>June</li>
-            <li>July</li>
-            <li>August</li>
-            <li>September</li>
-            <li>October</li>
-            <li>November</li>
-            <li>December</li>
+            <li>Test 1</li>
+            <li>Test 2</li>
+            <li>Test 3</li>
         </ul>
     </div>
   )
