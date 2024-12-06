@@ -1,14 +1,21 @@
-import React from 'react';
 import Header from './Header';
-import LeftNavigation from './LeftNavigation';
+import React, { useState } from 'react';
+import LeftNavigation from './LeftNavigation'
 import RightNavigation from './RightNavigation';
 
 const HomePage = () => {
+
+  const [content, setContent] = useState('Click on an item to display content here.');
+
+  const handleContentChange = (newContent) => {
+    setContent(newContent);
+  };
+
   return (
     <div className='Hompage-Container'>
       <Header />
-      <LeftNavigation />
-      <RightNavigation />
+      <LeftNavigation onContentChange={handleContentChange} />
+      <RightNavigation content={content} />
     </div>
   );
 };
