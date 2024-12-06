@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const LeftNavigation =(onContentChange)=> {
+const LeftNavigation =({ onContentChange })=> {
   return (
     
     <div id="nav-bar">
@@ -16,24 +16,24 @@ const LeftNavigation =(onContentChange)=> {
          <hr />
       </div>
       <div id="nav-content">
-        <div class="nav-button">
+        <div class="nav-button" onContentChange={'content for anime quiz'}>
           <i class="fas fa-palette"></i>
           <span>Anime Quiz</span>
         </div>
-        <div class="nav-button">
+        <div class="nav-button" onContentChange={'Content for quiz history'}>
           <i class="fas fa-images"></i>
           <span>History Quiz</span>
         </div>
-        <div class="nav-button">
+        <div class="nav-button" onContentChange={'Content for Random Quiz'}>
           <i class="fas fa-thumbtack"></i>
           <span>Random Quiz</span>
        </div>
         <hr />
        <div class="nav-button">
-         <i class="fas fa-heart"></i>
+         <i class="fas fa-heart" onContentChange={'Content for random quiz'}></i>
          <span>Quiz History</span>
        </div>
-       <div class="nav-button">
+       <div class="nav-button" onContentChange={'Content for user ranking'}>
          <i class="fas fa-chart-line"></i>
          <span>User Ranking</span>
        </div>
