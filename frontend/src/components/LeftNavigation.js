@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LeftNavigation = ({ onContentChange }) => {
-  console.log('onContentChange:', onContentChange);
+  // console.log('onContentChange:', onContentChange);
   return (
     <div id="nav-bar">
       <input id="nav-toggle" type="checkbox" />
