@@ -1,4 +1,9 @@
 import React from 'react';
+import AnimeQuiz from './AnimeQuiz';
+import RandomQuiz from './RandomQuiz';
+import History from './History';
+import UserRanking from './UserRanking';
+import Scores from './Scores';
 
 const LeftNavigation = ({ onContentChange }) => {
   // console.log('onContentChange:', onContentChange);
@@ -6,7 +11,7 @@ const LeftNavigation = ({ onContentChange }) => {
     <div id="nav-bar">
       <input id="nav-toggle" type="checkbox" />
       <div id="nav-header">
-        <a id="nav-title" href="#" target="_blank" rel="noopener noreferrer">
+        <a id="nav-title">
           Q<i className="fab fa-codepen"></i>uizQuest
         </a>
         <label htmlFor="nav-toggle">
@@ -15,30 +20,30 @@ const LeftNavigation = ({ onContentChange }) => {
         <hr />
       </div>
       <div id="nav-content">
-        <div className="nav-button" onClick={() => onContentChange('Content for anime quiz')}>
+        <div className="nav-button" onClick={() => onContentChange(<AnimeQuiz />)}>
           <i className="fas fa-palette"></i>
           <span>Anime Quiz</span>
         </div>
-        <div className="nav-button" onClick={() => onContentChange('Content for quiz history')}>
-          <i className="fas fa-images"></i>
-          <span>History Quiz</span>
-        </div>
-        <div className="nav-button" onClick={() => onContentChange('Content for random quiz')}>
+        <div className="nav-button" onClick={() => onContentChange(<RandomQuiz />)}>
           <i className="fas fa-thumbtack"></i>
           <span>Random Quiz</span>
         </div>
+        <div className="nav-button" onClick={() => onContentChange(<History />)}>
+          <i className="fas fa-images"></i>
+          <span>History Quiz</span>
+        </div>
         <hr />
-        <div className="nav-button" onClick={() => onContentChange('Content for quiz history')}>
+        {/* <div className="nav-button" onClick={() => onContentChange('Content for quiz history')}>
           <i className="fas fa-heart"></i>
           <span>Quiz History</span>
-        </div>
-        <div className="nav-button" onClick={() => onContentChange('Content for user ranking')}>
+        </div> */}
+        <div className="nav-button" onClick={() => onContentChange(<UserRanking />)}>
           <i className="fas fa-chart-line"></i>
           <span>User Ranking</span>
         </div>
-        <div className="nav-button" onClick={() => onContentChange('TBD content')}>
+        <div className="nav-button" onClick={() => onContentChange(<Scores />)}>
           <i className="fas fa-fire"></i>
-          <span>TBD</span>
+          <span>Scores</span>
         </div>
         <div className="nav-button" onClick={() => onContentChange('TBD content')}>
           <i className="fas fa-magic"></i>

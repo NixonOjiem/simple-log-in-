@@ -5,7 +5,10 @@ import RightNavigation from './RightNavigation';
 
 const HomePage = () => {
 
-  const [content, setContent] = useState('Click on an item to display content here.');
+  const [content, setContent] = useState(<div> 
+    <h1>QuizQuest</h1>
+    <p>Enjoy Anime and Trivia questions, check the leader board to know your rank.</p>
+    </div>);
 
   const handleContentChange = (newContent) => {
     setContent(newContent);

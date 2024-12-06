@@ -1,12 +1,12 @@
 import React from 'react'
 
-const RandomQuiz=()=> {
+const UserRanking=()=> {
   return (
     <div>
-        <h1>RandomQuiz</h1>
+        <h1>UserRanking</h1>
         <p>Lorem</p>
     </div>
   )
 }
 
-export default RandomQuiz;
+export default UserRanking
