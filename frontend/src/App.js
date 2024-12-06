@@ -1,25 +1,33 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import HomePage from './components/HomePage';
+import LeftNavigation from './components/LeftNavigation';
+import RightNavigation from './components/RightNavigation';
 
-const App= ()=> {
+const App = () => {
+  const [content, setContent] = useState('Click on an item to display content here.');
 
-  const [content, setContent] = useState('Click on an item to display content here.'); 
-  const handleContentChange = (newContent) => { setContent(newContent); };
+  const handleContentChange = (newContent) => {
+    setContent(newContent);
+  };
 
   return (
-    <div className="App">
-     <Router>
-      <Routes>
-        <Route path="/signin" element={<SignIn onContentChange= {handleContentChange}/>} />
-        <Route path="/home" element={<HomePage onContentChange= {handleContentChange}/>} />
-        <Route path="/" element={<SignIn onContentChange= {handleContentChange}/>} />
-      </Routes>
-    </Router>
+    <div className="App" style={{ display: 'flex' }}>
+      <Router>
+        <LeftNavigation onContentChange={handleContentChange} />
+        <div style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/" element={<SignIn />} />
+          </Routes>
+          <RightNavigation content={content} />
+        </div>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;

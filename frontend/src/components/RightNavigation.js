@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const RightNavigation = ({content})=> {
+const RightNavigation = ({ content }) => {
   return (
-    <div className='Rightnavigation'>
-        {content}
+    <div className="Rightnavigation">
+      {content}
     </div>
-  )
-}
+  );
+};
 
 export default RightNavigation;
