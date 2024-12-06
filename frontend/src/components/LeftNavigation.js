@@ -6,7 +6,7 @@ const LeftNavigation = ({ onContentChange }) => {
     <div id="nav-bar">
       <input id="nav-toggle" type="checkbox" />
       <div id="nav-header">
-        <a id="nav-title" href="https://codepen.io" target="_blank" rel="noopener noreferrer">
+        <a id="nav-title" href="#" target="_blank" rel="noopener noreferrer">
           Q<i className="fab fa-codepen"></i>uizQuest
         </a>
         <label htmlFor="nav-toggle">
