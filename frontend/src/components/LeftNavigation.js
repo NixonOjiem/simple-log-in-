@@ -1,10 +1,15 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AnimeQuiz from './AnimeQuiz';
 import RandomQuiz from './RandomQuiz';
 import History from './History';
 import UserRanking from './UserRanking';
 import Scores from './Scores';
-
+import { faOtter } from '@fortawesome/free-solid-svg-icons';
+import { faShuffle } from '@fortawesome/free-solid-svg-icons';
+import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { faRankingStar } from '@fortawesome/free-solid-svg-icons';
+import { faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 const LeftNavigation = ({ onContentChange }) => {
   // console.log('onContentChange:', onContentChange);
   return (
@@ -12,7 +17,7 @@ const LeftNavigation = ({ onContentChange }) => {
       <input id="nav-toggle" type="checkbox" />
       <div id="nav-header">
         <a id="nav-title">
-          Q<i className="fab fa-codepen"></i>uizQuest
+          QuizQuest
         </a>
         <label htmlFor="nav-toggle">
           <span id="nav-toggle-burger"></span>
@@ -21,15 +26,15 @@ const LeftNavigation = ({ onContentChange }) => {
       </div>
       <div id="nav-content">
         <div className="nav-button" onClick={() => onContentChange(<AnimeQuiz />)}>
-          <i className="fas fa-palette"></i>
+        <FontAwesomeIcon icon={faOtter} className='LeftIcons'/>
           <span>Anime Quiz</span>
         </div>
         <div className="nav-button" onClick={() => onContentChange(<RandomQuiz />)}>
-          <i className="fas fa-thumbtack"></i>
+        <FontAwesomeIcon icon={faShuffle} className='LeftIcons' />
           <span>Random Quiz</span>
         </div>
         <div className="nav-button" onClick={() => onContentChange(<History />)}>
-          <i className="fas fa-images"></i>
+        <FontAwesomeIcon icon={faClockRotateLeft} className='LeftIcons' />
           <span>History Quiz</span>
         </div>
         <hr />
@@ -38,11 +43,11 @@ const LeftNavigation = ({ onContentChange }) => {
           <span>Quiz History</span>
         </div> */}
         <div className="nav-button" onClick={() => onContentChange(<UserRanking />)}>
-          <i className="fas fa-chart-line"></i>
-          <span>User Ranking</span>
+         <FontAwesomeIcon icon={faRankingStar} className='LeftIcons' />
+         <span>User Ranking</span>
         </div>
         <div className="nav-button" onClick={() => onContentChange(<Scores />)}>
-          <i className="fas fa-fire"></i>
+          <FontAwesomeIcon icon={faStarHalfStroke} className='LeftIcons' />
           <span>Scores</span>
         </div>
         <div className="nav-button" onClick={() => onContentChange('TBD content')}>

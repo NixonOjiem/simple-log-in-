@@ -533,6 +533,11 @@ code {
   #nav-footer-avatar img {
     height: 100%;
   }
+
+  .LeftIcons{
+    font-size: 24px;
+    margin-right: 10px;
+  }
   
   
 /*This is the end of left navigation bar*/
