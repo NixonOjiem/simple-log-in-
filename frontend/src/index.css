@@ -557,3 +557,13 @@ code {
     margin-right: 10px;
 }
 
+.List-Of-Questions{
+  padding: 10px;
+  list-style: none;
+  margin-left: 20px;
+}
+
+.List-Of-Questions li{
+  padding: 10px;
+  text-align: justify;
+}

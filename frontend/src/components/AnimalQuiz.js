@@ -36,10 +36,13 @@ const AnimalQuiz = () => {
 
     return (
         <div>
-            <h1>Animal Questions</h1>
-            <ul>
+            <h1>Animal Trivia Questions</h1>
+
+            <ul className='List-Of-Questions'>
                 {questions.map((question, index) => (
-                    <li key={index}>{question.question}</li>
+                    
+                    <li key={index}>{question.question} {question.incorrect_answers}</li>
+                       
                 ))}
             </ul>
         </div>
