@@ -10,6 +10,10 @@ import { faShuffle } from '@fortawesome/free-solid-svg-icons';
 import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import { faRankingStar } from '@fortawesome/free-solid-svg-icons';
 import { faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
+import { faShieldDog } from '@fortawesome/free-solid-svg-icons';
+import AnimalQuiz from './AnimalQuiz';
+
+
 const LeftNavigation = ({ onContentChange }) => {
   // console.log('onContentChange:', onContentChange);
   return (
@@ -37,11 +41,12 @@ const LeftNavigation = ({ onContentChange }) => {
         <FontAwesomeIcon icon={faClockRotateLeft} className='LeftIcons' />
           <span>History Quiz</span>
         </div>
+        
+        <div className="nav-button" onClick={() => onContentChange(<AnimalQuiz />)}>
+          <FontAwesomeIcon icon = {faShieldDog} className='LeftIcons' />
+          <span>Animal Quiz</span>
+        </div>
         <hr />
-        {/* <div className="nav-button" onClick={() => onContentChange('Content for quiz history')}>
-          <i className="fas fa-heart"></i>
-          <span>Quiz History</span>
-        </div> */}
         <div className="nav-button" onClick={() => onContentChange(<UserRanking />)}>
          <FontAwesomeIcon icon={faRankingStar} className='LeftIcons' />
          <span>User Ranking</span>
@@ -50,10 +55,10 @@ const LeftNavigation = ({ onContentChange }) => {
           <FontAwesomeIcon icon={faStarHalfStroke} className='LeftIcons' />
           <span>Scores</span>
         </div>
-        <div className="nav-button" onClick={() => onContentChange('TBD content')}>
+        {/* <div className="nav-button" onClick={() => onContentChange('TBD content')}>
           <i className="fas fa-magic"></i>
           <span>TBD</span>
-        </div>
+        </div> */}
         <hr />
         <div className="nav-button" onClick={() => onContentChange('Content by Nixon Ojiem')}>
           <i className="fas fa-gem"></i>
