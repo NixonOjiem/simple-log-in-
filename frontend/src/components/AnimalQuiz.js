@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const AnimalQuiz= ()=> {
+const AnimalQuiz = () => {
     const myAPI = 'https://opentdb.com/api.php?amount=12&category=27&type=multiple';
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -11,7 +11,9 @@ const AnimalQuiz= ()=> {
         const fetchQuestions = async () => {
             try {
                 const response = await axios.get(myAPI);
-                setQuestions(response.data);
+                setQuestions(response.data.results);
+                localStorage.setItem('animalQuizQuestions', JSON.stringify(response.data.results)); // Store in local storage
+                console.log(response.data.results);
             } catch (err) {
                 setError('Error fetching data');
             } finally {
@@ -19,22 +21,29 @@ const AnimalQuiz= ()=> {
             }
         };
 
-        fetchQuestions();
+        // Check local storage for questions
+        const storedQuestions = localStorage.getItem('animalQuizQuestions');
+        if (storedQuestions) {
+            setQuestions(JSON.parse(storedQuestions)); // Load from local storage
+            setLoading(false); // No need to show loading if we have data
+        } else {
+            fetchQuestions(); // Fetch from API if no data in local storage
+        }
     }, []);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
-  return (
-    <div>
-    <h1>Animal Questions</h1>
-    <ul>
-        {questions.map((question) => (
-            <li key={question.id}>{question.text}</li>
-        ))}
-    </ul>
-</div>
-  )
-}
+    return (
+        <div>
+            <h1>Animal Questions</h1>
+            <ul>
+                {questions.map((question, index) => (
+                    <li key={index}>{question.question}</li>
+                ))}
+            </ul>
+        </div>
+    );
+};
 
 export default AnimalQuiz;
