@@ -33,18 +33,34 @@ const AnimalQuiz = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
-
+        
     return (
         <div>
             <h1>Animal Trivia Questions</h1>
+            {questions.map((question, index) => {
+                // Combine correct and incorrect answers
+                const choices = [...question.incorrect_answers, question.correct_answer];
+                // Shuffle the choices for randomness
+                const shuffledChoices = choices.sort(() => Math.random() - 0.5);
 
-            <ul className='List-Of-Questions'>
-                {questions.map((question, index) => (
-                    
-                    <li key={index}>{question.question} {question.incorrect_answers}</li>
-                       
-                ))}
-            </ul>
+                return (
+                    <div key={index} className='questions'>
+                        <p><b>{index + 1}.</b> {question.question}</p>
+                        <ul className='multiple-choice'>
+                            {shuffledChoices.map((choice, i) => (
+                                <li key={i}>
+                                    <input 
+                                    type="checkbox" 
+                                    className='Multiple-Choices'
+                                    />
+                                    {choice}
+                                    {/* {console.log(`Correct answer for question ${index + 1}: ${question.correct_answer}`)} */}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                );
+            })}
         </div>
     );
 };
