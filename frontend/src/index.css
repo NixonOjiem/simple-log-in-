@@ -548,11 +548,12 @@ code {
 
 .Rightnavigation{
     background-color: #18283b;
-    width: 80%;
+    width: 70%;
+    height: auto;
     float: right;
     margin-top: 10px;
     border-radius: 15px;
-    height: 80vh;
+    min-height: 80vh;
     color: #fff;
     margin-right: 10px;
 }

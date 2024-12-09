@@ -54,7 +54,7 @@ const AnimalQuiz = () => {
                                     className='Multiple-Choices'
                                     />
                                     {choice}
-                                    {/* {console.log(`Correct answer for question ${index + 1}: ${question.correct_answer}`)} */}
+                                    {console.log(`Correct answer for question ${index + 1}: ${question.correct_answer}`)}
                                 </li>
                             ))}
                         </ul>
