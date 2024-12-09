@@ -10,12 +10,25 @@ const AnimalQuiz = () => {
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
+                console.log('Fetching questions...'); // Log fetching start
                 const response = await axios.get(myAPI);
-                setQuestions(response.data.results);
-                localStorage.setItem('animalQuizQuestions', JSON.stringify(response.data.results)); // Store in local storage
-                console.log(response.data.results);
+                console.log('API Response:', response.data); // Log the API response
+                if (response.data && response.data.results) {
+                    const shuffledQuestions = response.data.results.map((question, index) => {
+                        console.log(`Processing question ${index + 1}:`, question); // Log each question
+                        const choices = [...question.incorrect_answers, question.correct_answer];
+                        const shuffledChoices = choices.sort(() => Math.random() - 0.5);
+                        console.log('Shuffled Choices:', shuffledChoices); // Log shuffled choices
+                        return { ...question, shuffledChoices };
+                    });
+                    setQuestions(shuffledQuestions);
+                    localStorage.setItem('animalQuizQuestions', JSON.stringify(shuffledQuestions)); // Store in local storage
+                } else {
+                    throw new Error('Invalid response format');
+                }
             } catch (err) {
                 setError('Error fetching data');
+                console.error(err);
             } finally {
                 setLoading(false);
             }
@@ -24,43 +37,52 @@ const AnimalQuiz = () => {
         // Check local storage for questions
         const storedQuestions = localStorage.getItem('animalQuizQuestions');
         if (storedQuestions) {
-            setQuestions(JSON.parse(storedQuestions)); // Load from local storage
+            console.log('Loading questions from local storage...'); // Log loading from local storage
+            const parsedQuestions = JSON.parse(storedQuestions);
+            const shuffledQuestions = parsedQuestions.map((question, index) => {
+                if (!question.shuffledChoices) {
+                    const choices = [...question.incorrect_answers, question.correct_answer];
+                    question.shuffledChoices = choices.sort(() => Math.random() - 0.5);
+                }
+                return question;
+            });
+            setQuestions(shuffledQuestions);
             setLoading(false); // No need to show loading if we have data
         } else {
+            console.log('Fetching questions from API...'); // Log fetching from API
             fetchQuestions(); // Fetch from API if no data in local storage
         }
     }, []);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
-        
+
+    console.log('Questions:', questions); // Log questions
+
     return (
         <div>
             <h1>Animal Trivia Questions</h1>
-            {questions.map((question, index) => {
-                // Combine correct and incorrect answers
-                const choices = [...question.incorrect_answers, question.correct_answer];
-                // Shuffle the choices for randomness
-                const shuffledChoices = choices.sort(() => Math.random() - 0.5);
-
-                return (
+            {questions.length > 0 ? (
+                questions.map((question, index) => (
                     <div key={index} className='questions'>
                         <p><b>{index + 1}.</b> {question.question}</p>
                         <ul className='multiple-choice'>
-                            {shuffledChoices.map((choice, i) => (
+                            {question.shuffledChoices && question.shuffledChoices.map((choice, i) => (
                                 <li key={i}>
                                     <input 
-                                    type="checkbox" 
-                                    className='Multiple-Choices'
+                                        type="radio" 
+                                        name={`question-${index}`} 
+                                        value={choice} 
                                     />
                                     {choice}
-                                    {console.log(`Correct answer for question ${index + 1}: ${question.correct_answer}`)}
                                 </li>
                             ))}
                         </ul>
                     </div>
-                );
-            })}
+                ))
+            ) : (
+                <p>No questions available</p>
+            )}
         </div>
     );
 };
