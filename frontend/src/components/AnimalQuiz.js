@@ -6,6 +6,8 @@ const AnimalQuiz = () => {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [userAnswers, setUserAnswers] = useState({});
+    const [score, setScore] = useState(null);
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -54,6 +56,24 @@ const AnimalQuiz = () => {
         }
     }, []);
 
+    const handleAnswerChange = (questionIndex, choice) => {
+        setUserAnswers({
+            ...userAnswers,
+            [questionIndex]: choice,
+        });
+    };
+
+    const handleSubmit = () => {
+        let correctAnswers = 0;
+        questions.forEach((question, index) => {
+            if (userAnswers[index] === question.correct_answer) {
+                correctAnswers += 1;
+            }
+        });
+        const percentageScore = (correctAnswers / questions.length) * 100;
+        setScore(percentageScore);
+    };
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
@@ -73,6 +93,7 @@ const AnimalQuiz = () => {
                                         type="radio" 
                                         name={`question-${index}`} 
                                         value={choice} 
+                                        onChange={() => handleAnswerChange(index, choice)}
                                     />
                                     {choice}
                                 </li>
@@ -83,6 +104,8 @@ const AnimalQuiz = () => {
             ) : (
                 <p>No questions available</p>
             )}
+            <button onClick={handleSubmit}>Submit</button>
+            {score !== null && <p>Your score: {score.toFixed(2)}%</p>}
         </div>
     );
 };
