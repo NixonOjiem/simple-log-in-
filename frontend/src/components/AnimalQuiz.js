@@ -8,7 +8,7 @@ const AnimalQuiz = () => {
     const [error, setError] = useState('');
     const [userAnswers, setUserAnswers] = useState({});
     const [score, setScore] = useState(null);
-    const user_id = localStorage.getItem('user_id');
+    const userId = localStorage.getItem('userId');
     const username = localStorage.getItem('username')
 
     useEffect(() => {
@@ -79,7 +79,7 @@ const AnimalQuiz = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
-    console.log('userid', user_id);
+    console.log('User ID:', userId);
     console.log(username);
     console.log('Questions:', questions); // Log questions
 

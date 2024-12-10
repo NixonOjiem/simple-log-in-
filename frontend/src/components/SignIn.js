@@ -12,9 +12,14 @@ const SignIn = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3001/signin', { username, password });
-      // alert(response.data);
-      navigate('/home'); // Redirect to the homepage
-      localStorage.setItem('username', username);
+      if (response.data.userId) {
+        localStorage.setItem('userId', response.data.userId); // Store userId in localStorage
+        localStorage.setItem('username', username); // Store username in localStorage
+        console.log('User ID:', response.data.userId); // Print the user ID to the console
+        navigate('/home'); // Redirect to the homepage
+      } else {
+        alert('Sign in failed');
+      }
     } catch (error) {
       alert('Wrong credentials');
     }
