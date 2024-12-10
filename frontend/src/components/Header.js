@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate for naviga
 function Header() {
     const [username, setUsername] = useState('');
     const navigate = useNavigate(); // Initialize useHistory
-
+    
     useEffect(() => {
       const storedUsername = localStorage.getItem('username');
+      
       if (storedUsername) {
         setUsername(storedUsername);
       }

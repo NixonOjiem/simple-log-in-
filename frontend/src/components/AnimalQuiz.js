@@ -8,6 +8,8 @@ const AnimalQuiz = () => {
     const [error, setError] = useState('');
     const [userAnswers, setUserAnswers] = useState({});
     const [score, setScore] = useState(null);
+    const user_id = localStorage.getItem('user_id');
+    const username = localStorage.getItem('username')
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -77,6 +79,8 @@ const AnimalQuiz = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
+    console.log('userid', user_id);
+    console.log(username);
     console.log('Questions:', questions); // Log questions
 
     return (
@@ -84,11 +88,11 @@ const AnimalQuiz = () => {
             <h1>Animal Trivia Questions</h1>
             {questions.length > 0 ? (
                 questions.map((question, index) => (
-                    <div key={index} className='questions'>
-                        <p><b>{index + 1}.</b> {question.question}</p>
+                    <div key={index} className='Question-Container'>
+                        <p className='Questions'><b>{index + 1}.</b> {question.question}</p>
                         <ul className='multiple-choice'>
                             {question.shuffledChoices && question.shuffledChoices.map((choice, i) => (
-                                <li key={i}>
+                                <li key={i} className='List-of-Choices'>
                                     <input 
                                         type="radio" 
                                         name={`question-${index}`} 
@@ -104,7 +108,7 @@ const AnimalQuiz = () => {
             ) : (
                 <p>No questions available</p>
             )}
-            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleSubmit} className='btn'>Submit</button>
             {score !== null && <p>Your score: {score.toFixed(2)}%</p>}
         </div>
     );

@@ -537,6 +537,7 @@ code {
   .LeftIcons{
     font-size: 24px;
     margin-right: 10px;
+    color: #fff;
   }
   
   
@@ -558,13 +559,16 @@ code {
     margin-right: 10px;
 }
 
-.List-Of-Questions{
+.Questions{
   padding: 10px;
-  list-style: none;
   margin-left: 20px;
+  text-align: left;
 }
 
-.List-Of-Questions li{
+.List-of-Choices{
   padding: 10px;
-  text-align: justify;
+  text-align: left;
+  margin-left: 10%;
+  list-style: none;
+
 }

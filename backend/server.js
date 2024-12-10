@@ -31,11 +31,14 @@ db.connect(err => {
   app.post('/signin', (req, res) => {
     const { username, password } = req.body;
     const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
+    const query_id = 'SELECT id FROM users WHERE username = ?';
+    localStorage.setItem('user_id', query_id);
     db.query(query, [username, password], (err, results) => {
       if (err) {
         res.status(500).send(err);
       } else if (results.length > 0) {
         res.status(200).send('Sign in successful');
+        
       } else {
         res.status(401).send('Invalid credentials');
       }
