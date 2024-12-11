@@ -67,6 +67,18 @@ db.connect(err => {
       });
     });
   });
+
+  //Post animal quiz end-point
+  app.post('/anime-results', (req, res)=>{
+    const {userId, score} = req.body;
+    const query = 'INSERT INTO animal_quiz_scores (user_id, score, date, time) VALUES (?, ?, CURDATE(), NOW())';
+    db.query(query, [userId, score], (err, result) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.send('Results saved');
+  });
+  })
   
   app.listen(process.env.PORT || PORT, () => {
     console.log(`Server running on port ${PORT}`);

@@ -65,7 +65,7 @@ const AnimalQuiz = () => {
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         let correctAnswers = 0;
         questions.forEach((question, index) => {
             if (userAnswers[index] === question.correct_answer) {
@@ -74,6 +74,19 @@ const AnimalQuiz = () => {
         });
         const percentageScore = (correctAnswers / questions.length) * 100;
         setScore(percentageScore);
+
+         try{
+              await axios.post('http://localhost:3001/anime-results',{
+                userId: localStorage.getItem('userId'), // Assuming the userId is stored in localStorage
+                score: percentageScore
+                
+              });
+              alert('Results posted');
+             }
+             catch (error){
+                console.error('Error submitting results:', error);
+                alert('Failed to post results');
+             }
     };
 
     if (loading) return <p>Loading...</p>;
