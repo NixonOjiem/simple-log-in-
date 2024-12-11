@@ -77,8 +77,10 @@ app.post('/anime-results', (req, res) => {
 });
 
 // Collecting data from animal_quiz table
-app.get('/animalquiz-results', (req, res) => {
-  db.query('SELECT test_id, score, time FROM animal_quiz_scores WHERE user_id = 1', (err, results) => {
+app.get('/animalquiz-results/:user_id', (req, res) => {
+  const user_id = req.params.user_id;
+  console.log('Fetching results for user_id:', user_id); // Add this line
+  db.query('SELECT test_id, score, time FROM animal_quiz_scores WHERE user_id = ?', [user_id], (err, results) => {
     if (err) {
       console.error('Error fetching data:', err);
       res.status(500).send('Error fetching data');

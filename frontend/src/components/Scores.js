@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Scores = () => {
+const Scores = ({ userId }) => { // Assuming userId is passed as a prop
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/animalquiz-results')
+    axios.get(`http://localhost:3001/animalquiz-results/${userId}`)
       .then(response => {
         console.log('Data fetched:', response.data); // Log the data to check its structure
         setData(response.data);
@@ -13,7 +13,7 @@ const Scores = () => {
       .catch(error => {
         console.error('Error fetching data:', error);
       });
-  }, []);
+  }, [userId]);
 
   return (
     <div>
