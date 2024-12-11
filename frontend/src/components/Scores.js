@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Scores = ({ userId }) => { // Assuming userId is passed as a prop
+const Scores = () => {
   const [data, setData] = useState([]);
+  const storedUserId = localStorage.getItem('userId');
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/animalquiz-results/${userId}`)
-      .then(response => {
-        console.log('Data fetched:', response.data); // Log the data to check its structure
-        setData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, [userId]);
+    console.log('Stored userId:', storedUserId); // Log the userId from localStorage
+
+    if (storedUserId) {
+      axios.get(`http://localhost:3001/animalquiz-results/${storedUserId}`)
+        .then(response => {
+          console.log('Data fetched:', response.data); // Log the data to check its structure
+          setData(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }, [storedUserId]);
 
   return (
     <div>

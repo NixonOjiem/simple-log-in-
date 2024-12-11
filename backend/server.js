@@ -67,6 +67,7 @@ app.post('/signup', (req, res) => {
 // Post animal quiz endpoint
 app.post('/anime-results', (req, res) => {
   const { userId, score } = req.body;
+  console.log('Received userId:', userId); // Add this line
   const query = 'INSERT INTO animal_quiz_scores (user_id, score, date, time) VALUES (?, ?, CURDATE(), NOW())';
   db.query(query, [userId, score], (err, result) => {
     if (err) {
