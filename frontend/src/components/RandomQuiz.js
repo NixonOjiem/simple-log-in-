@@ -28,6 +28,8 @@ const RandomQuiz = () => {
           });
           setQuestions(shuffledQuestions);
           localStorage.setItem('randomQuizQuestions', JSON.stringify(shuffledQuestions)); // Store in local storage
+          const storedData = localStorage.getItem('randomQuizQuestions')
+          console.log(`The sored data is: ${storedData}`);
         } else {
           throw new Error('Invalid response format');
         }
@@ -39,29 +41,29 @@ const RandomQuiz = () => {
       }
     };
 
-    // Check local storage for questions
-    const storedQuestions = localStorage.getItem('randomQuizQuestions');
-    if (storedQuestions) {
-      console.log('Loading questions from local storage...'); // Log loading from local storage
-      const parsedQuestions = JSON.parse(storedQuestions);
-      if (Array.isArray(parsedQuestions)) {
-        const shuffledQuestions = parsedQuestions.map((question, index) => {
-          if (!question.shuffledChoices) {
-            const choices = [...question.incorrect_answers, question.correct_answer];
-            question.shuffledChoices = choices.sort(() => Math.random() - 0.5);
-          }
-          return question;
-        });
-        setQuestions(shuffledQuestions);
-      } else {
-        console.error('Invalid questions format in local storage');
-        fetchQuestions(); // Fetch from API if local storage data is invalid
-      }
-      setLoading(false); // No need to show loading if we have data
-    } else {
-      console.log('Fetching questions from API...'); // Log fetching from API
-      fetchQuestions(); // Fetch from API if no data in local storage
-    }
+    //Check local storage for questions
+     const storedQuestions = localStorage.getItem('randomQuizQuestions');
+     if (storedQuestions) {
+       console.log('Loading questions from local storage...'); // Log loading from local storage
+       const parsedQuestions = JSON.parse(storedQuestions);
+       if (Array.isArray(parsedQuestions)) {
+         const shuffledQuestions = parsedQuestions.map((question, index) => {
+           if (!question.shuffledChoices) {
+             const choices = [...question.incorrect_answers, question.correct_answer];
+             question.shuffledChoices = choices.sort(() => Math.random() - 0.5);
+           }
+           return question;
+         });
+         setQuestions(shuffledQuestions);
+       } else {
+         console.error('Invalid questions format in local storage');
+         fetchQuestions(); // Fetch from API if local storage data is invalid
+       }
+       setLoading(false); // No need to show loading if we have data
+     } else {
+       console.log('Fetching questions from API...'); // Log fetching from API
+       fetchQuestions(); // Fetch from API if no data in local storage
+     }
   }, []);
 
   return (
