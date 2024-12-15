@@ -14,22 +14,21 @@ const RandomQuiz = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        console.log('begin fetching questions'); // log out to the console that we are about to start fetching questions
+        console.log('begin fetching questions');
         const response = await axios.get(myAPI);
         console.log(response.data.results);
 
         if (response.data.results) {
           const shuffledQuestions = response.data.results.map((question, index) => {
-            console.log(`processing question: ${index + 1}:`, question); // just logging each question
-            const choices = [...question.incorrect_answers, question.correct_answer]; // storing the correct and incorrect answer
+            console.log(`processing question: ${index + 1}:`, question);
+            const choices = [...question.incorrect_answers, question.correct_answer];
             const shuffledChoices = choices.sort(() => Math.random() - 0.5);
-            console.log(`the shuffled choices are: ${shuffledChoices}`); // log to the console the shuffled choices
-            return { ...question, shuffledChoices }; // return the question with shuffled choices
+            console.log(`the shuffled choices are: ${shuffledChoices}`);
+            return { ...question, shuffledChoices };
           });
           setQuestions(shuffledQuestions);
-          localStorage.setItem('randomQuizQuestions', JSON.stringify(shuffledQuestions)); // Store in local storage
-          const storedData = localStorage.getItem('randomQuizQuestions')
-          console.log(`The sored data is: ${storedData}`);
+          localStorage.setItem('randomQuizQuestions', JSON.stringify(shuffledQuestions));
+          console.log(`The stored data is: ${JSON.stringify(shuffledQuestions)}`);
         } else {
           throw new Error('Invalid response format');
         }
@@ -41,29 +40,30 @@ const RandomQuiz = () => {
       }
     };
 
-    //Check local storage for questions
-     const storedQuestions = localStorage.getItem('randomQuizQuestions');
-     if (storedQuestions) {
-       console.log('Loading questions from local storage...'); // Log loading from local storage
-       const parsedQuestions = JSON.parse(storedQuestions);
-       if (Array.isArray(parsedQuestions)) {
-         const shuffledQuestions = parsedQuestions.map((question, index) => {
-           if (!question.shuffledChoices) {
-             const choices = [...question.incorrect_answers, question.correct_answer];
-             question.shuffledChoices = choices.sort(() => Math.random() - 0.5);
-           }
-           return question;
-         });
-         setQuestions(shuffledQuestions);
-       } else {
-         console.error('Invalid questions format in local storage');
-         fetchQuestions(); // Fetch from API if local storage data is invalid
-       }
-       setLoading(false); // No need to show loading if we have data
-     } else {
-       console.log('Fetching questions from API...'); // Log fetching from API
-       fetchQuestions(); // Fetch from API if no data in local storage
-     }
+    const storedRandomQuestions = localStorage.getItem('randomQuizQuestions');
+    if (storedRandomQuestions) {
+      console.log(`The local storage has these questions: ${storedRandomQuestions}`);
+      console.log('Loading questions from local storage...');
+      const parsedQuestions = JSON.parse(storedRandomQuestions);
+      if (Array.isArray(parsedQuestions) && parsedQuestions.every(q => q !== null)) {
+        const shuffledQuestions = parsedQuestions.map((question, index) => {
+          if (!question.shuffledChoices) {
+            const choices = [...question.incorrect_answers, question.correct_answer];
+            question.shuffledChoices = choices.sort(() => Math.random() - 0.5);
+          }
+          return question;
+        });
+        setQuestions(shuffledQuestions);
+      } else {
+        console.error('Invalid questions format in local storage');
+        localStorage.removeItem('randomQuizQuestions'); // Clear invalid data
+        fetchQuestions();
+      }
+      setLoading(false);
+    } else {
+      console.log('Fetching questions from API...');
+      fetchQuestions();
+    }
   }, []);
 
   return (
