@@ -66,6 +66,17 @@ const RandomQuiz = () => {
     }
   }, []);
 
+  const handleAnswerChange = (questionIndex,choice) => {
+    setUserAnswers({
+      ...userAnswers,
+      [questionIndex]: choice,
+    })
+  }
+
+  const handleSubmit = async () =>{
+
+  }
+
   return (
     <div>
       <h1>RandomQuiz</h1>
@@ -80,13 +91,14 @@ const RandomQuiz = () => {
               <h2>{question.question}</h2>
               <ul>
                 {question.shuffledChoices && question.shuffledChoices.map((choice, i) => (
-                  <li key={i}>{choice}</li>
+                  <li key={i}><input type='radio' name={`question-${index}`}  value = {choice} onChange={() => handleAnswerChange(index, choice)}/>{choice}</li> //name={`question-${index}`}  allows you to sellect multiple questions.
                 ))}
               </ul>
             </li>
           ))}
         </ul>
       )}
+      <button onClick={handleSubmit} className='btn'>Submit</button>
     </div>
   );
 };
