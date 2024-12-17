@@ -65,7 +65,7 @@ app.post('/signup', (req, res) => {
 });
 
 // Post animal quiz endpoint
-app.post('/anime-results', (req, res) => {
+app.post('/animal-results', (req, res) => {
   const { userId, score } = req.body;
   console.log('Received userId:', userId); // Add this line
   const query = 'INSERT INTO animal_quiz_scores (user_id, score, date, time) VALUES (?, ?, CURDATE(), NOW())';
@@ -91,7 +91,7 @@ app.get('/animalquiz-results/:user_id', (req, res) => {
   });
 });
 
-//post random questions endpoint
+//post random questions results endpoint
 app.post('/random-quiz-results', (req, res) => {
   const{userId, score} = req.body;
   const query = 'INSERT INTO random_quiz_scores (user_id, score, date, time) VALUES (?,?, CURDATE(), NOW())';
@@ -100,6 +100,19 @@ app.post('/random-quiz-results', (req, res) => {
       return res.status(500).send(err);
     }
     res.send('Results saved');
+  });
+});
+
+// collecting data from random_quiz endpoint
+app.get('/random-quiz-results/:user_id', (req, res) => {
+  const user_id = req.params.user_id;
+  db.query('SELECT test_id, score, time FROM random_quiz_scores WHERE user_id = ?', [user_id], (err, results) => {
+    if (err) {
+      console.error('Error fetching data: ', err);
+      res.status(500).send('Error fetching data');
+      return;
+    }
+    res.json(results);
   });
 });
 
