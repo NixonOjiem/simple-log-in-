@@ -77,7 +77,7 @@ app.post('/anime-results', (req, res) => {
   });
 });
 
-// Collecting data from animal_quiz table
+// Collecting data from animal_quiz table endpoint
 app.get('/animalquiz-results/:user_id', (req, res) => {
   const user_id = req.params.user_id;
   console.log('Fetching results for user_id:', user_id); // Add this line
@@ -88,6 +88,18 @@ app.get('/animalquiz-results/:user_id', (req, res) => {
       return;
     }
     res.json(results);
+  });
+});
+
+//post random questions endpoint
+app.post('/random-quiz-results', (req, res) => {
+  const{userId, score} = req.body;
+  const query = 'INSERT INTO random_quiz_scores (user_id, score, date, time) VALUES (?,?, CURDATE(), NOW())';
+  db.query(query, [userId, score], (err, result) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.send('Results saved');
   });
 });
 

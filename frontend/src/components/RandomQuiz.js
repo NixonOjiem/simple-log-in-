@@ -82,6 +82,18 @@ const RandomQuiz = () => {
     });
     const percentageScore = (correctAnswers / questions.length) * 100;
     setScore(percentageScore);
+    console.log(`${userId}`)
+
+    try {
+      await axios.post('http://localhost:3001/random-quiz-results', {
+        userId: userId,
+        score: percentageScore
+      });
+      alert('Results Posted')
+    } catch (error) {
+      console.log('Error submitting results', error);
+      alert('Failed to post results');      
+    }
   }
 
   return (
