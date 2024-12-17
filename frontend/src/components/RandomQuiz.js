@@ -74,7 +74,14 @@ const RandomQuiz = () => {
   }
 
   const handleSubmit = async () =>{
-
+    let correctAnswers = 0;
+    questions.forEach((question, index) => {
+        if (userAnswers[index] === question.correct_answer) {
+            correctAnswers += 1;
+        }
+    });
+    const percentageScore = (correctAnswers / questions.length) * 100;
+    setScore(percentageScore);
   }
 
   return (
@@ -99,6 +106,8 @@ const RandomQuiz = () => {
         </ul>
       )}
       <button onClick={handleSubmit} className='btn'>Submit</button>
+      {score !== null && <p>Your score: {score.toFixed(2)}%</p>}
+
     </div>
   );
 };
