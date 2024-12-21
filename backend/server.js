@@ -99,7 +99,7 @@ app.post('/random-quiz-results', (req, res) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.send('Results saved!');
+    res.send('Results Saved!');
   });
 });
 
@@ -124,7 +124,7 @@ app.post('/anime-quiz-results', (req, res) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.send('Results saved!');
+    res.send('Results Saved!');
   });
 });
 
