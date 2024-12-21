@@ -73,7 +73,7 @@ app.post('/animal-results', (req, res) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.send('Results saved');
+    res.send('Results saved!');
   });
 });
 
@@ -99,7 +99,7 @@ app.post('/random-quiz-results', (req, res) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.send('Results saved');
+    res.send('Results saved!');
   });
 });
 
@@ -124,7 +124,7 @@ app.post('/anime-quiz-results', (req, res) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.send('Results saved');
+    res.send('Results saved!');
   });
 });
 
@@ -134,7 +134,7 @@ app.get('/anime-quiz-results', (req, res) => {
   db.query('SELECT test_id, score, time FROM anime_quiz_scores WHERE user_id = ?', [user_id], (err, results) => {
     if (err) {
       console.error('Error fetching data: ', err);
-      res.status(500).send('Error fetching data');
+      res.status(500).send('Error fetching data!');
       return;
     }
     res.json(results);
