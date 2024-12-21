@@ -116,6 +116,31 @@ app.get('/random-quiz-results/:user_id', (req, res) => {
   });
 });
 
+//Posting data odf anime quiz endpoint
+app.post('/anime-quiz-results', (req, res) => {
+  const{userId, score} = req.body;
+  const query = 'INSERT INTO anime_quiz_scores (user_id, score, date, time) VALUES (?,?, CURDATE(), NOW())';
+  db.query(query, [userId, score], (err, result) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.send('Results saved');
+  });
+});
+
+//collect question results of anime quiz
+app.get('/anime-quiz-results', (req, res) => {
+  const user_id = req.query.user_id;
+  db.query('SELECT test_id, score, time FROM anime_quiz_scores WHERE user_id = ?', [user_id], (err, results) => {
+    if (err) {
+      console.error('Error fetching data: ', err);
+      res.status(500).send('Error fetching data');
+      return;
+    }
+    res.json(results);
+  });
+});
+
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

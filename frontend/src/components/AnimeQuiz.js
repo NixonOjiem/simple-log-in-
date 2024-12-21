@@ -76,7 +76,7 @@ const AnimeQuiz = () => {
     setScore(percentageScore);
 
      try{
-          await axios.post('http://localhost:3001/anime-results',{
+          await axios.post('http://localhost:3001/anime-quiz-results',{
             userId: localStorage.getItem('userId'), // Assuming the userId is stored in localStorage
             score: percentageScore
             
