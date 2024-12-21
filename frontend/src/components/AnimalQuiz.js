@@ -102,7 +102,7 @@ const AnimalQuiz = () => {
             {questions.length > 0 ? (
                 questions.map((question, index) => (
                     <div key={index} className='Question-Container'>
-                        <p className='Questions'><b>{index + 1}.</b> {question.question}</p>
+                        <p className='Questions'><b>{index + 1}. </b> {question.question}</p>
                         <ul className='multiple-choice'>
                             {question.shuffledChoices && question.shuffledChoices.map((choice, i) => (
                                 <li key={i} className='List-of-Choices'>

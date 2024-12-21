@@ -98,15 +98,16 @@ const AnimeQuiz = () => {
     <div>
       <h1>Anime Quiz</h1>
       {questions.map((question, index) => (
-        <div key={index}>
-          <h2>{question.question}</h2>
+        <div key={index} className='Question-Container'>
+          <p className='Questions'><b>{index+1}. </b>{question.question}</p>
           {question.shuffledChoices.map((choice, i) => (
-            <div key={i}>
+            <div key={i} className='Anime-Choice'>
               <input
                 type="radio"
                 name={`question-${index}`}
                 value={choice}
                 onChange={() => handleAnswerChange(index, choice)}
+                className='Anime-choices'
               />
               {choice}
             </div>

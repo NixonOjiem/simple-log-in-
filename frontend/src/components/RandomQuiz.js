@@ -107,10 +107,10 @@ const RandomQuiz = () => {
         <ul>
           {questions.map((question, index) => (
             <li key={index}>
-              <h2>{question.question}</h2>
-              <ul>
+              <p className='Questions'><b>{index + 1}. </b>{question.question}</p>
+              <ul className='multiple-choice'>
                 {question.shuffledChoices && question.shuffledChoices.map((choice, i) => (
-                  <li key={i}><input type='radio' name={`question-${index}`}  value = {choice} onChange={() => handleAnswerChange(index, choice)}/>{choice}</li> //name={`question-${index}`}  allows you to sellect multiple questions.
+                  <li key={i} className='List-of-Choices'><input type='radio' name={`question-${index}`}  value = {choice} onChange={() => handleAnswerChange(index, choice)}/>{choice}</li> //name={`question-${index}`}  allows you to sellect multiple questions.
                 ))}
               </ul>
             </li>
