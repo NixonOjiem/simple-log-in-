@@ -65,6 +65,30 @@ const AnimeQuiz = () => {
     }));
   };
 
+  const handleSubmit = async () => {
+    let correctAnswers = 0;
+    questions.forEach((question, index) => {
+        if (userAnswers[index] === question.correct_answer) {
+            correctAnswers += 1;
+        }
+    });
+    const percentageScore = (correctAnswers / questions.length) * 100;
+    setScore(percentageScore);
+
+     try{
+          await axios.post('http://localhost:3001/anime-results',{
+            userId: localStorage.getItem('userId'), // Assuming the userId is stored in localStorage
+            score: percentageScore
+            
+          });
+          alert('Results posted');
+         }
+         catch (error){
+            console.error('Error submitting results:', error);
+            alert('Failed to post results');
+         }
+};  
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -89,6 +113,8 @@ const AnimeQuiz = () => {
           ))}
         </div>
       ))}
+      <button onClick={handleSubmit} className='btn'>Submit</button>
+      {score !== null && <p>Your score: {score.toFixed(2)}%</p>}
     </div>
   );
 };
