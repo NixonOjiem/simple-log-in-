@@ -4,6 +4,7 @@ import axios from 'axios';
 const Scores = () => {
   const [animalQuizData, setAnimalQuizData] = useState([]);
   const [randomQuizData, setRandomQuizData] = useState([]);
+  const [historyQuizData, setHistoryQuizData] = useState([]);
   const storedUserId = localStorage.getItem('userId');
 
   useEffect(() => {
@@ -29,6 +30,14 @@ const Scores = () => {
         .catch(error => {
           console.error('Error fetching Random Quiz data:', error);
         });
+      axios.get(`http://localhost:3001/history-quiz-results/${storedUserId}`)
+      .then(response => {
+        console.log('History Quiz Data fetched:', response.data); // Log the data to check its structure
+        setHistoryQuizData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching History Quiz data:', error);
+      });
     }
   }, [storedUserId]);
 
@@ -44,6 +53,12 @@ const Scores = () => {
       <ul>
         {randomQuizData.map(item => (
           <li key={item.test_id}>{item.score} - {item.time}</li> // Ensure test_id is unique
+        ))}
+      </ul>
+      <h1>Scores for History Quiz</h1>
+      <ul>
+        {historyQuizData.map(item => (
+          <li key={item.test_id}>{item.score} - {item.time}</li> //Ensure test ID is unique
         ))}
       </ul>
     </div>

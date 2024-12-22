@@ -85,7 +85,7 @@ const History=()=> {
       console.log(`${userId}`)
   
       try {
-        await axios.post('http://localhost:3001/history-quiz', {
+        await axios.post('http://localhost:3001/history-quiz-results', {
           userId: userId,
           score: percentageScore
         });

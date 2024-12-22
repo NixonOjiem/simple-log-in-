@@ -141,6 +141,32 @@ app.get('/anime-quiz-results', (req, res) => {
   });
 });
 
+//posting history quiz endpoint
+app.post('/history-quiz-results', (req, res) => {
+  const { userId, score } = req.body;
+  const query = 'INSERT INTO history_quiz_scores (user_id, score, date, time) VALUES (?,?,CURDATE(), NOW())';
+  db.query(query, [userId, score], (err, result) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.send('Results Saved!');
+  });
+});
+
+//collecting history quiz results from server
+app.get('/history-quiz-results/:user_id', (req, res) => {
+  const user_id = req.params.user_id;
+  console.log('Fetching data for user_id: ', user_id)
+  db.query('SELECT test_id, score, time FROM history_quiz_scores WHERE user_id = ?', [user_id], (err, results) => {
+    if (err) {
+      console.error('Error fetching data: ', err);
+      res.status(500).send('Error fetching data!');
+      return;
+    }
+    res.json(results);
+  });
+});
+
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
