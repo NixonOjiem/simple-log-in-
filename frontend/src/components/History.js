@@ -65,10 +65,63 @@ const History=()=> {
         fetchQuestions();
       }
     }, []); // Empty dependency array to run only once on mount
+
+    const handleAnswerChange = (questionIndex,choice) => {
+      setUserAnswers({
+        ...userAnswers,
+        [questionIndex]: choice,
+      })
+    }
+
+    const handleSubmit = async () =>{
+      let correctAnswers = 0;
+      questions.forEach((question, index) => {
+          if (userAnswers[index] === question.correct_answer) {
+              correctAnswers += 1;
+          }
+      });
+      const percentageScore = (correctAnswers / questions.length) * 100;
+      setScore(percentageScore);
+      console.log(`${userId}`)
+  
+      try {
+        await axios.post('http://localhost:3001/history-quiz', {
+          userId: userId,
+          score: percentageScore
+        });
+        alert('Results Posted')
+      } catch (error) {
+        console.log('Error submitting results', error);
+        alert('Failed to post results');      
+      }
+    }
+
   return (
     <div>
-      <h1>History of Quiz</h1>
-      <p>Lorem</p>
+      <div>
+      <h1>History Quiz</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <ul>
+          {questions.map((question, index) => (
+            <li key={index}>
+              <p className='Questions'><b>{index + 1}. </b>{question.question}</p>
+              <ul className='multiple-choice'>
+                {question.shuffledChoices && question.shuffledChoices.map((choice, i) => (
+                  <li key={i} className='List-of-Choices'><input type='radio' name={`question-${index}`}  value = {choice} onChange={() => handleAnswerChange(index, choice)}/>{choice}</li> //name={`question-${index}`}  allows you to sellect multiple questions.
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      )}
+      <button onClick={handleSubmit} className='btn'>Submit</button>
+      {score !== null && <p>Your score: {score.toFixed(2)}%</p>}
+
+    </div>
       
     </div>
   )
