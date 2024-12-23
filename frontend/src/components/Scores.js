@@ -52,12 +52,33 @@ const Scores = () => {
     }
   }, [storedUserId]);
 
+  const formatDate = (isoDateString) => {
+    try {
+      // Convert the ISO date string to a Date object
+      const dateObject = new Date(isoDateString);
+  
+      // Check if the date object is valid
+      if (isNaN(dateObject.getTime())) {
+        throw new Error('Invalid date value');
+      }
+  
+      // Adjust the Date object to the local time zone
+      const localDate = new Date(dateObject.getTime() - (dateObject.getTimezoneOffset() * 60000));
+  
+      // Return the formatted date string
+      return localDate.toISOString();
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      return 'Invalid date';
+    }
+  };
+
   return (
     <div>
       <h1>Scores for Animal Quiz</h1>
       <ul>
         {animalQuizData.map(item => (
-          <li key={item.test_id}>{item.score} - {item.time}</li> // Ensure test_id is unique
+          <li key={item.test_id}> Score: {item.score}   Date: {formatDate(item.time)}</li> // Ensure test_id is unique
         ))}
       </ul>
       <h1>Scores for Random Quiz</h1>
