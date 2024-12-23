@@ -80,7 +80,7 @@ app.post('/animal-results', (req, res) => {
 // Collecting data from animal_quiz table endpoint
 app.get('/animalquiz-results/:user_id', (req, res) => {
   const user_id = req.params.user_id;
-  console.log('Fetching results for user_id:', user_id); // Add this line
+  console.log('Fetching results (Animal) for user_id:', user_id); // Add this line
   db.query('SELECT test_id, score, time FROM animal_quiz_scores WHERE user_id = ?', [user_id], (err, results) => {
     if (err) {
       console.error('Error fetching data:', err);
@@ -106,6 +106,7 @@ app.post('/random-quiz-results', (req, res) => {
 // collecting data from random_quiz endpoint
 app.get('/random-quiz-results/:user_id', (req, res) => {
   const user_id = req.params.user_id;
+  console.log('Fetching data (random) for user_id: ', user_id)
   db.query('SELECT test_id, score, time FROM random_quiz_scores WHERE user_id = ?', [user_id], (err, results) => {
     if (err) {
       console.error('Error fetching data: ', err);
@@ -116,7 +117,7 @@ app.get('/random-quiz-results/:user_id', (req, res) => {
   });
 });
 
-//Posting data odf anime quiz endpoint
+//Posting data of anime quiz endpoint
 app.post('/anime-quiz-results', (req, res) => {
   const{userId, score} = req.body;
   const query = 'INSERT INTO anime_quiz_scores (user_id, score, date, time) VALUES (?,?, CURDATE(), NOW())';
@@ -129,8 +130,9 @@ app.post('/anime-quiz-results', (req, res) => {
 });
 
 //collect question results of anime quiz
-app.get('/anime-quiz-results', (req, res) => {
-  const user_id = req.query.user_id;
+app.get('/anime-quiz-results/:user_id', (req, res) => {
+  const user_id = req.params.user_id;
+  console.log('Fetching data (Anime) for user_id: ', user_id)
   db.query('SELECT test_id, score, time FROM anime_quiz_scores WHERE user_id = ?', [user_id], (err, results) => {
     if (err) {
       console.error('Error fetching data: ', err);
@@ -156,7 +158,7 @@ app.post('/history-quiz-results', (req, res) => {
 //collecting history quiz results from server
 app.get('/history-quiz-results/:user_id', (req, res) => {
   const user_id = req.params.user_id;
-  console.log('Fetching data for user_id: ', user_id)
+  console.log('Fetching data (History) for user_id: ', user_id)
   db.query('SELECT test_id, score, time FROM history_quiz_scores WHERE user_id = ?', [user_id], (err, results) => {
     if (err) {
       console.error('Error fetching data: ', err);
