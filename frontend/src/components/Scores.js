@@ -84,19 +84,19 @@ const Scores = () => {
       <h1>Scores for Random Quiz</h1>
       <ul>
         {randomQuizData.map(item => (
-          <li key={item.test_id}>{item.score} - {item.time}</li> // Ensure test_id is unique
+          <li key={item.test_id}>Score: {item.score} - Date: {item.time}</li> // Ensure test_id is unique
         ))}
       </ul>
       <h1>Scores for History Quiz</h1>
       <ul>
         {historyQuizData.map(item => (
-          <li key={item.test_id}>{item.score} - {item.time}</li> //Ensure test ID is unique
+          <li key={item.test_id}>Score: {item.score} - Date: {item.time}</li> //Ensure test ID is unique
         ))}
       </ul>
       <h1>Scores for Anime Quiz</h1>
       <ul>
         {animeQuizData.map(item => (
-          <li key={item.test_id}>{item.score} - {item.time}</li> //
+          <li key={item.test_id}>Score: {item.score} - Date: {item.time}</li> //
         ))}
       </ul>
     </div>
