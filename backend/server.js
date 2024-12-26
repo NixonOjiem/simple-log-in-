@@ -169,6 +169,19 @@ app.get('/history-quiz-results/:user_id', (req, res) => {
   });
 });
 
+//collecting data for anime ranking
+app.get('/anime-ranking', (req, res) => {
+  console.log('Fetching ranked data for anime quiz');
+  db.query('SELECT * FROM anime_quiz_scores ORDER BY score DESC', (err, results)=>{
+    if (err) {
+      console.error('Error fetching data: ', err);
+      res.status(500).send('Error fetching data!');
+      return;
+    }
+    res.json(results);
+  });
+});
+
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
