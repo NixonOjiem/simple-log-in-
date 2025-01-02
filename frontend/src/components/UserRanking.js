@@ -1,26 +1,32 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const UserRanking = () => {
   const storedUserId = localStorage.getItem('userId');
   const [historyRanking, setHistoryRanking] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    const fetchRanking = async () => {
+      try {
+        const response = await axios.get('/history-ranking');
+        setHistoryRanking(response.data);
+      } catch (err) {
+        setError('Error fetching ranking data');
+        console.error('Error fetching ranking data:', err);
+      }
+    };
+
     if (storedUserId) {
-      // Fetch ranking from history quiz
-      axios.get('/hstory-ranking')
-        .then(response => {
-          setHistoryRanking(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching ranking data:', error);
-        });
+      fetchRanking();
     }
   }, [storedUserId]);
 
   return (
     <div>
       <h1>User Ranking</h1>
+      {error && <p>{error}</p>}
       <ul>
         {historyRanking.map((user, index) => (
           <li key={index}>
@@ -30,6 +36,10 @@ const UserRanking = () => {
       </ul>
     </div>
   );
+};
+
+UserRanking.propTypes = {
+  storedUserId: PropTypes.string,
 };
 
 export default UserRanking;
