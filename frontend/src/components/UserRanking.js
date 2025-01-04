@@ -10,7 +10,7 @@ const UserRanking = () => {
   useEffect(() => {
     const fetchRanking = async () => {
       try {
-        const response = await axios.get('/history-ranking');
+        const response = await axios.get('http://localhost:3001/history-ranking'); // Ensure this URL is correct
         setHistoryRanking(response.data);
       } catch (err) {
         setError('Error fetching ranking data');

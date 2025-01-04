@@ -209,10 +209,11 @@ app.get('/animal-ranking', (req, res) => {
   });
 });
 
-//collecting data for history quiz
-app.get('/hstory-ranking', (req, res) => {
-  console.log('Fetching ranked data for anime quiz');
-  db.query('SELECT * FROM history_quiz_scores ORDER BY score DESC', (err, results)=>{
+//collecting data for history quiz ranking
+
+app.get('/history-ranking', (req, res) => {
+  console.log('Fetching ranked data for history quiz');
+  db.query('SELECT * FROM history_quiz_scores ORDER BY score DESC', (err, results) => {
     if (err) {
       console.error('Error fetching data: ', err);
       res.status(500).send('Error fetching data!');
