@@ -6,6 +6,7 @@ const UserRanking = () => {
   const storedUserId = localStorage.getItem('userId');
   const [historyRanking, setHistoryRanking] = useState([]);
   const [error, setError] = useState(null);
+  const userName = localStorage.getItem('username')
 
   useEffect(() => {
     const fetchRanking = async () => {
@@ -25,12 +26,13 @@ const UserRanking = () => {
 
   return (
     <div>
-      <h1>User Ranking</h1>
+      <h1>User Ranking in History</h1>
+      {console.log(userName)}
       {error && <p>{error}</p>}
       <ul>
         {historyRanking.map((user, index) => (
           <li key={index}>
-            {user.username}: {user.score}
+            {user.user_id}: {user.score}
           </li>
         ))}
       </ul>

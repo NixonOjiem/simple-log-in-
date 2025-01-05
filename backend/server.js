@@ -182,7 +182,6 @@ app.get('/anime-ranking', (req, res) => {
   });
 });
 
-
 //Collecting data for amimal quiz for ranking
 app.get('/animal-ranking', (req, res) => {
   console.log('Fetching ranked data for anime quiz');
