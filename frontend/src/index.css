@@ -131,6 +131,10 @@ code {
   font-weight: bold;
 }
 
+ol {
+  list-style-type: decimal; /* Ensure ordered list displays numbers */
+}
+
 .btnBox {
     display: flex;
     align-items: center;

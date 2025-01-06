@@ -30,16 +30,19 @@ const UserRanking = () => {
       <h1>User Ranking in History</h1>
       {console.log(userName)}
       {error && <p>{error}</p>}
-      <ul>
+      <ol>
+        
         {historyRanking.map((user, index) => (
           <li
             key={index}
             className={user.user_id.toString() === storedUserId ? 'highlight' : ''}
           >
-            {user.user_id}: {user.score}
+            {index+1}{/*user.user_id*/}: {user.score}
+            
           </li>
         ))}
-      </ul>
+        
+      </ol>
     </div>
   );
 };
