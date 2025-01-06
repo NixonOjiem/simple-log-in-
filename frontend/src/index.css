@@ -126,6 +126,11 @@ code {
     color: #ffffff;
 }
 
+.highlight {
+  background-color: yellow; /* or any other highlight color */
+  font-weight: bold;
+}
+
 .btnBox {
     display: flex;
     align-items: center;

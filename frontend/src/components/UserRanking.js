@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+ // Make sure to import the CSS file
 
 const UserRanking = () => {
   const storedUserId = localStorage.getItem('userId');
   const [historyRanking, setHistoryRanking] = useState([]);
   const [error, setError] = useState(null);
-  const userName = localStorage.getItem('username')
+  const userName = localStorage.getItem('username');
 
   useEffect(() => {
     const fetchRanking = async () => {
@@ -31,7 +32,10 @@ const UserRanking = () => {
       {error && <p>{error}</p>}
       <ul>
         {historyRanking.map((user, index) => (
-          <li key={index}>
+          <li
+            key={index}
+            className={user.user_id.toString() === storedUserId ? 'highlight' : ''}
+          >
             {user.user_id}: {user.score}
           </li>
         ))}
